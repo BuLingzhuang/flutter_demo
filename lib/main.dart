@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        "new_page": (context) => NewRoute(),
+      },
     );
   }
 }
@@ -26,7 +29,69 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyNewPageState createState() => new _MyNewPageState();
+}
+
+class NewRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("New Route"),
+      ),
+      body: Center(
+        child: Text("This is new route body"),
+      ),
+    );
+  }
+}
+
+class _MyNewPageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {}
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(widget.title),
+      ),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Text(
+              'You have pushed the button this many times:',
+            ),
+            new Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
+            ),
+            FlatButton(
+              child: Text("open new route"),
+              textColor: Colors.blue,
+              onPressed: () {
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) {
+//                          return NewRoute();
+//                        },
+//                        settings: RouteSettings()));
+                Navigator.pushNamed(context, "new_page");
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: new Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
 }
 
 class TestClass {
@@ -173,7 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void streamTest(){
+  void streamTest() {
     Stream.fromFutures([]);
   }
 
