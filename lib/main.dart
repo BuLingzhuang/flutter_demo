@@ -1,6 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
+import 'SwitchAndCheckBoxTestRoute.dart';
+import 'DecorateBoxRoute.dart';
+import 'TestMainActivity.dart';
+import 'ListViewRoute.dart';
+import 'CustomScrollViewTestRoute.dart';
 
 void main() => runApp(new MyApp());
 
@@ -16,8 +22,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(title: 'Flutter Demo Home Page'),
+//      home: new SwitchAndCheckBoxTestRoute(),
       routes: {
         "new_page": (context) => NewRoute(),
+        "btn_page": (context) => ButtonRoute(),
+        "tips_page": (context) => TipsRoute("测试测试测试"),
+        "switch_page": (context) => SwitchAndCheckBoxTestRoute(),
+        "decoration_box_page": (context) => DecorateBoxRoute(),
+        "test_main_activity_page": (context) => TestMainActivity(),
+        "list_view_page": (context) => ListViewRoute(),
+        "custom_scroll_view_test_route": (context) =>
+            CustomScrollViewTestRoute(),
       },
     );
   }
@@ -30,6 +45,111 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyNewPageState createState() => new _MyNewPageState();
+}
+
+class ButtonRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("按钮Route"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text("RaisedButton"),
+              onPressed: () {
+                print("This is a RaisedButton");
+              },
+            ),
+            FlatButton(
+              child: Text("FlatButton"),
+              onPressed: () {
+                print("This is a FlatButton");
+              },
+            ),
+            OutlineButton(
+              child: Text("OutlineButton"),
+              onPressed: () {
+                print("This is a OutlineButton");
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.thumb_down),
+              onPressed: () {
+                print("This is a IconButton");
+              },
+            ),
+            RaisedButton(
+              child: Text("CustomRaisedButton"),
+              onPressed: () {
+                print("This is a CustomRaisedButton");
+              },
+              color: Colors.orange,
+              highlightColor: Colors.redAccent,
+              colorBrightness: Brightness.dark,
+              splashColor: Colors.grey,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TipsRoute extends StatelessWidget {
+  var mTipsStr;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Tips Route"),
+      ),
+      body: Center(
+//        child: Text(mTipsStr),
+//        child: Image.asset("images/ic_coins.webp"),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(mTipsStr),
+              Image.asset("images/ic_coins.webp"),
+              Text(
+                "Hello world! I'm BuLingzhuang. " * 4,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                textScaleFactor: 2.0,
+                style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationStyle: TextDecorationStyle.dashed,
+                    decorationColor: Colors.red),
+              ),
+              Text.rich(TextSpan(children: [
+                TextSpan(text: "Title:"),
+                TextSpan(
+                    text: "this is a title.",
+                    style: TextStyle(color: Colors.green)),
+              ])),
+              Text(
+                "20190428",
+                style: TextStyle(fontFamily: "RNH", fontSize: 20.0),
+              ),
+              Image.network(
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556539855616&di=c14ffb28498c4472bec9fee6509bd7b8&imgtype=0&src=http%3A%2F%2Fec4.images-amazon.com%2Fimages%2FI%2F71wWVGA1G%252BL.jpg",
+                fit: BoxFit.none,
+              )
+            ]),
+      ),
+    );
+  }
+
+  TipsRoute(this.mTipsStr);
 }
 
 class NewRoute extends StatelessWidget {
@@ -79,9 +199,65 @@ class _MyNewPageState extends State<MyHomePage> {
 //                          return NewRoute();
 //                        },
 //                        settings: RouteSettings()));
-                Navigator.pushNamed(context, "new_page");
+                Navigator.pushNamed(context, "tips_page");
               },
             ),
+            FlatButton(
+              child: Text("open btn route"),
+              textColor: Colors.blue,
+              onPressed: () {
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) {
+//                          return NewRoute();
+//                        },
+//                        settings: RouteSettings()));
+                Navigator.pushNamed(context, "btn_page");
+              },
+            ),
+            FlatButton(
+              child: Text("open switch route"),
+              textColor: Colors.green,
+              onPressed: () {
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) {
+//                          return NewRoute();
+//                        },
+//                        settings: RouteSettings()));
+                Navigator.pushNamed(context, "switch_page");
+              },
+            ),
+            FlatButton(
+              child: Text("open decoration box route"),
+              textColor: Colors.red,
+              onPressed: () {
+                Navigator.pushNamed(context, "decoration_box_page");
+              },
+            ),
+            FlatButton(
+              child: Text("open test main activity route"),
+              textColor: Colors.orange,
+              onPressed: () {
+                Navigator.pushNamed(context, "test_main_activity_page");
+              },
+            ),
+            FlatButton(
+              child: Text("open list view route"),
+              textColor: Colors.yellow,
+              onPressed: () {
+                Navigator.pushNamed(context, "list_view_page");
+              },
+            ),
+            FlatButton(
+              child: Text("open custom scroll view test route"),
+              textColor: Colors.lightGreenAccent,
+              onPressed: () {
+                Navigator.pushNamed(context, "custom_scroll_view_test_route");
+              },
+            )
           ],
         ),
       ),
